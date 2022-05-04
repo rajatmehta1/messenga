@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: default # change to default or docker based on type of config
+  datasource:
+    url: jdbc:mysql://localhost:3306/messengadb?useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
