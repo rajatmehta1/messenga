@@ -1,6 +1,7 @@
 package com.sv.messenga.services;
 
 import com.sv.messenga.dtos.RoomDTO;
+import com.sv.messenga.exceptions.RoomNotFoundException;
 import com.sv.messenga.pos.Room;
 import com.sv.messenga.pos.User;
 import com.sv.messenga.repository.RoomRepository;
@@ -23,13 +24,13 @@ public class RoomService {
         this.userRepository = userRepository;
     }
 
-    public RoomDTO getRoom(Integer roomId) {
+    public RoomDTO getRoom(Integer roomId) throws RoomNotFoundException {
         Optional<Room> r = roomRepository.findById(roomId);
-        if(r.isPresent()) {
+        if(r.isEmpty()) {
+            throw new RoomNotFoundException("Room doesnot exist");
+        } else {
             Room room = r.get();
             return new RoomDTO(room);
-        } else {
-            return null;
         }
     }
 
