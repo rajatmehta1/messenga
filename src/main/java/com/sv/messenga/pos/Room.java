@@ -3,6 +3,8 @@ package com.sv.messenga.pos;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "chatrooms")
@@ -19,5 +21,8 @@ public class Room {
 
     @Column(name = "room_desc")
     public String roomDesc;
+
+    @ManyToMany(mappedBy = "chatRooms")
+    public Set<User> users = new HashSet<>();
 
 }
